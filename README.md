@@ -4,13 +4,6 @@
 
 The Arbitrum Token Bridge is a [custom Arbitrum bridge](https://docs.arbitrum.io/build-decentralized-apps/token-bridging/bridge-tokens-programmatically/how-to-bridge-tokens-custom-gateway) that allows users to deposit a supported token to Arbitrum and withdraw it back to Ethereum. It operates similarly to the previously deployed [Arbitrum Dai Bridge](https://github.com/makerdao/arbitrum-dai-bridge) and relies on the same security model but allows MakerDAO governance to update the set of tokens supported by the bridge.
 
-## Contracts
-
-- `L1TokenGateway.sol` - L1 side of the bridge. Transfers the deposited tokens into an escrow contract. Transfer them back to the user upon receiving a withdrawal message from the `L2TokenGateway`.
-- `L2TokenGateway.sol` - L2 side of the bridge. Mints new L2 tokens after receiving a deposit message from `L1TokenGateway`. Burns L2 tokens when withdrawing them to L1.
-
-The `L1TokenGateway` and `L2TokenGateway` contracts use the ERC-1822 UUPS pattern for upgradeability and the ERC-1967 proxy storage slots standard. It is important that the `TokenGatewayDeploy` library sequences be used for deploying.
-
 ### External dependencies
 
 - The L2 implementations of the bridged tokens are not provided as part of this repository and are assumed to exist in external repositories. It is assumed that only simple, regular ERC20 tokens will be used with this bridge. In particular, the supported tokens are assumed to revert on failure (instead of returning false) and do not execute any hook on transfer.
