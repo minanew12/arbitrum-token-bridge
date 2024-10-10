@@ -25,10 +25,6 @@ To deposit a given amount of a supported token into Arbitrum, Alice calls `outbo
 
 Note that the `outboundTransfer[CustomRefund]` payable function requires a number of gas parameters to be provided, and must be called with some corresponding amount of ETH as `msg.value`. An example of how to calculate these parameters is provided in `script/Deposit.s.sol`.
 
-### L2 to L1 withdrawals
-
-To withdraw her tokens back to L1, Alice calls `outboundTransfer()` on the `L2TokenGateway`. This call burns Alice's tokens and performs a call to the [ArbSys](https://docs.arbitrum.io/how-arbitrum-works/arbos/l2-l1-messaging#client-flow) precompile contract, which enables anyone to call `finalizeInboundTransfer()` on `L1TokenGateway` after the ~7 days security period. That latter call releases an equivalent amount of L1 tokens from the escrow to Alice.
-
 ## Upgrades
 
 ### Upgrade the bridge implementation(s)
